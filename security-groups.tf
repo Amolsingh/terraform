@@ -10,6 +10,13 @@ resource "aws_security_group" "allow_web" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -18,9 +25,9 @@ resource "aws_security_group" "allow_web" {
   }
 }
 
-// POSTGRES
+//Postgres
 resource "aws_security_group" "allow_rds" {
-  name = "allow_rds"
+  name        = "allow_rds"
   description = "Allow RDS inbound traffic"
   vpc_id      = aws_vpc.demo_vpc.id
 
@@ -29,7 +36,7 @@ resource "aws_security_group" "allow_rds" {
     to_port     = 80
     protocol    = "TCP"
     description = "PostgreSQL"
-    cidr_blocks = ["0.0.0.0/0"] // >
+    cidr_blocks = ["0.0.0.0/0"] 
   }
 
   ingress {
@@ -37,14 +44,14 @@ resource "aws_security_group" "allow_rds" {
     to_port     = 443
     protocol    = "TCP"
     description = "PostgreSQL"
-    cidr_blocks = ["0.0.0.0/0"] // >
+    cidr_blocks = ["0.0.0.0/0"] 
   }
 
   ingress {
-    from_port     = 5432
-    to_port       = 5432
-    protocol      = "TCP"
-    description   = "PostgreSQL"
-    cidr_blocks   = ["0.0.0.0/0"] // >
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "TCP"
+    description = "PostgreSQL"
+    cidr_blocks = ["0.0.0.0/0"] 
   }
 }
